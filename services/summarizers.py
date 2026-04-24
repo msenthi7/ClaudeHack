@@ -1,6 +1,5 @@
 from .ollama_client import run_ollama_llm
 from concurrent.futures import ThreadPoolExecutor
-import subprocess
 
 
 def summarize_demographics(data_list):
@@ -58,8 +57,8 @@ def get_all_summaries(demo, ae, lab, vs, mh):
         f1 = executor.submit(summarize_demographics, demo)
         f2 = executor.submit(summarize_adverse_events, ae)
         f3 = executor.submit(summarize_lab_results, lab)
-        f4 = executor.submit(summarize_vital_signs, demo)
-        f5 = executor.submit(summarize_medical_history, demo)
+        f4 = executor.submit(summarize_vital_signs, vs)
+        f5 = executor.submit(summarize_medical_history, mh)
         return {
             "demographics_summary": f1.result(),
             "adverse_events_summary": f2.result(),
@@ -82,8 +81,8 @@ def create_combined_summary(
         f"Demographics Summary:\n{demo_summary}\n\n"
         f"Adverse Events Summary:\n{ae_summary}\n\n"
         f"Lab Results Summary:\n{lab_summary}\n\n"
-        f"Vital Signs Summary:\n{lab_summary}\n\n"
-        f"Medical History Summary:\n{lab_summary}\n\n"
+        f"Vital Signs Summary:\n{vs_summary}\n\n"
+        f"Medical History Summary:\n{mh_summary}\n\n"
         "Provide the combined, professional summary:"
     )
     return run_ollama_llm(prompt)

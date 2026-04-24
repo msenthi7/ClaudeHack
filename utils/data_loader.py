@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 from models.sdtm_models import (
     Demographics,
@@ -44,15 +45,15 @@ from models.sdtm_models import (
 
 
 def load_sdtm_data(patient_id: str):
-    base_path = r"D:\ACL Project\sdtm-data-process-ai\data"
+    base_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data")
 
     try:
         # Load the SDTM CSV files
-        dm = pd.read_csv(f"{base_path}\\dm.csv")
-        ae = pd.read_csv(f"{base_path}\\ae.csv")
-        lb = pd.read_csv(f"{base_path}\\lb.csv")
-        vs = pd.read_csv(f"{base_path}\\vs.csv")
-        mh = pd.read_csv(f"{base_path}\\mh.csv")
+        dm = pd.read_csv(os.path.join(base_path, "dm.csv"))
+        ae = pd.read_csv(os.path.join(base_path, "ae.csv"))
+        lb = pd.read_csv(os.path.join(base_path, "lb.csv"))
+        vs = pd.read_csv(os.path.join(base_path, "vs.csv"))
+        mh = pd.read_csv(os.path.join(base_path, "mh.csv"))
 
     except FileNotFoundError as e:
         print(f"Error loading file: {e}")

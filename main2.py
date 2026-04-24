@@ -10,6 +10,7 @@ from rich.panel import Panel
 from rich.status import Status
 from rich.layout import Layout
 import time
+import os
 import sys
 
 # ==========================================
@@ -54,7 +55,7 @@ CURRENT_PATIENT = {
 }
 
 # Configuration for Vector DB
-DB_PATH = r"D:\ACL Project\sdtm-data-process-ai\db_creator\db_creator"
+DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "db")
 COLLECTION_NAME = "medical_knowledge"
 MODEL_NAME = "all-MiniLM-L6-v2"
 
